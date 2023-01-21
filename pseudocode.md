@@ -6,8 +6,10 @@
 
 - A start button (already in HTML starter code).
 - Event listener on button click.
-- When clicked, first question will appear (Math.rand).
 - When clicked, timer will begin (from 60s).
+- When clicked, the start section will add class hide.
+- When clicked, the question container will remove class hide (be visible).
+- When clicked, first question will appear (Math.rand).
 
 ##2
 

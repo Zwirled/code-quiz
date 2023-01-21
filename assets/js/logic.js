@@ -8,6 +8,8 @@ let choiceContainer = document.querySelector('#choices');
 let time = document.querySelector('#time');
 let count = 60;
 
+let score = 0;
+
 // Starts timer at 60 before pressing start button
 time.textContent = count;
 
@@ -71,14 +73,17 @@ function nextQuestion() {
 }
 
 
-// Adds event listener to correct answer
+// Adds event listener to check for correct answer
 choiceContainer.addEventListener('click', function (event) {
     // If button with correct answer is clicked...
     if (event.target.innerText === quiz[currentQuestion].answer) {
+        // Adds 1 point to score
+        score += 1;
         // Check if there are questions left
         if (currentQuestion === quiz.length - 1) {
             console.log("Quiz ended");
             endQuiz();
+            collectScore();
         } else {
             // Increase the index of currentQuestion
             currentQuestion++;
@@ -98,6 +103,11 @@ choiceContainer.addEventListener('click', function (event) {
         }
     }
 });
+
+function collectScore() {
+    let scoreMessage = score + "/" + quiz.length + " and you had " + count + "s remaining";
+    let finalScore = document.getElementById("final-score").textContent = scoreMessage;
+}
 
 
 // Hides the start scereen and shows the question container

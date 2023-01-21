@@ -1,6 +1,6 @@
-
-let start = document.querySelector('#start');
+let startContainer = document.querySelector('#start-screen');
 let questionContainer = document.querySelector('#questions');
+let endContainer = document.querySelector('#end-screen');
 
 let questionTitle = document.querySelector('#question-title');
 let choiceContainer = document.querySelector('#choices');
@@ -19,7 +19,7 @@ let currentQuestion = 0;
 
 // Begin the timer
 function startTimer() {
-    //Timer element - starts the 60s countdown
+    // Timer element - starts the 60s countdown
     let timer = setInterval(function () {
         // Count timer to go down by 1 after each iteration
         count--;
@@ -27,10 +27,16 @@ function startTimer() {
         time.textContent = count;
         // End the timer if it reaches 0s
         if (count <= 0) {
-            // Clears interval and stops timer
+            // Stops timer
             clearInterval(timer);
-            // sets visible time to 0
+            // Sets visible time to 0
             time.textContent = 0;
+        }
+        // If all questions have been answered, stop the timer
+        if (currentQuestion === quiz.length - 1) {
+            // Stops timer
+            clearInterval(timer);
+
         }
         // Change interval every 1s
     }, 1000);
@@ -69,10 +75,16 @@ function nextQuestion() {
 choiceContainer.addEventListener('click', function (event) {
     // If button with correct answer is clicked...
     if (event.target.innerText === quiz[currentQuestion].answer) {
-        // Increase the index of currentQuestion
-        currentQuestion++;
-        // Move on to the next question
-        nextQuestion();
+        // Check if there are questions left
+        if (currentQuestion === quiz.length - 1) {
+            console.log("Quiz ended");
+            endQuiz();
+        } else {
+            // Increase the index of currentQuestion
+            currentQuestion++;
+            // Move on to the next question
+            nextQuestion();
+        }
 
     } else {
         // If count is greater than 10s...
@@ -91,7 +103,7 @@ choiceContainer.addEventListener('click', function (event) {
 // Hides the start scereen and shows the question container
 function startQuiz() {
     // Hide start-screen on start button click
-    document.getElementById('start-screen').classList.add('hide');
+    startContainer.classList.add('hide');
 
     // Display questions container on start button click
     questionContainer.classList.remove('hide');
@@ -100,6 +112,15 @@ function startQuiz() {
     nextQuestion();
 }
 
+// Hides the start scereen and shows the question container
+function endQuiz() {
+    // Hide questions container on quiz end
+    questionContainer.classList.add('hide');
+
+    // Display questions container on start button click
+    endContainer.classList.remove('hide');
+
+}
 
 
 // On start button click, run the following functions...

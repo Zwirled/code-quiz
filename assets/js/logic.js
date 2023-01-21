@@ -2,67 +2,96 @@
 let start = document.querySelector('#start');
 let questionContainer = document.querySelector('#questions');
 
-let question = document.querySelector('#question-title');
+let questionTitle = document.querySelector('#question-title');
 let choiceContainer = document.querySelector('#choices');
 
 let time = document.querySelector('#time');
 let count = 60;
+
+// Starts timer at 60 before pressing start button
 time.textContent = count;
 
-// init();
+let currentQuestion = 0;
 
-// function to begin the timer
+// init(); // come back to later
+
+
+
+// Begin the timer
 function startTimer() {
-    //timer element - starts the 60s countdown
+    //Timer element - starts the 60s countdown
     let timer = setInterval(function () {
-        // count timer to go down by 1 after each iteration
+        // Count timer to go down by 1 after each iteration
         count--;
-        // change the time ID content to be equal to the count
+        // Change the time ID content to be equal to the count
         time.textContent = count;
         // End the timer if it reaches 0s
         if (count <= 0) {
             // Clears interval and stops timer
             clearInterval(timer);
         }
-        // change interval every 1s
+        // Change interval every 1s
     }, 1000);
 }
 
 
-start.addEventListener("click", function () {
+// Get the next question along
+function nextQuestion() {
+    // Change the question title (Replace content in the H2)
+    questionTitle.textContent = quiz[currentQuestion].question;
+    // Reset the innerHTML of the #choices div to an empty string
+    choiceContainer.innerHTML = '';
 
-    startTimer();
+    // For loop to get the list items and buttons within
+    for (let i = 0; i < quiz[currentQuestion].choices.length; i++) {
+        // Create li element
+        let li = document.createElement('li');
+        // Create button element
+        let choice = document.createElement('button');
+        // Set the text within the button to be the choice
+        choice.innerText = quiz[currentQuestion].choices[i];
+        // Append the button to the li
+        li.appendChild(choice);
+        // Append the li to the #choices div
+        choiceContainer.appendChild(li);
+    }
+}
 
-    // hide start-screen on start button click
-    document.getElementById("start-screen").classList.add('hide');
 
-    //display questions container on start button click
+// Adds event listener to correct answer
+choiceContainer.addEventListener('click', function (event) {
+    // If button with correct answer is clicked...
+    if (event.target.innerText === quiz[currentQuestion].answer) {
+        // Increase the index of currentQuestion
+        currentQuestion++;
+        // Move on to the next question
+        nextQuestion();
+
+    } else {
+        // Minus 10s from the timer
+        count -= 10;
+    }
+});
+
+
+// Hides the start scereen and shows the question container
+function startQuiz() {
+    // Hide start-screen on start button click
+    document.getElementById('start-screen').classList.add('hide');
+
+    // Display questions container on start button click
     questionContainer.classList.remove('hide');
 
-    // Add the question into the h2
-    question.textContent = quizInfo[0].question;
+    // Calls the next question function
+    nextQuestion();
+}
 
-    //create the ordered list
-    const list = document.createElement('ol');
 
-    // // create a loop to get each list item (choices)
-    for (let i = 0; i < quizInfo[0].choices.length; i++) {
 
-        // create the list items
-        const li = document.createElement('li');
-        // create the button within the list items
-        const choice = document.createElement('button');
-
-        // assign the object array to the list item
-        choice.innerText = quizInfo[0].choices[i];
-
-        // append the button to the li
-        li.appendChild(choice);
-        // append li to the ordered list
-        list.appendChild(li);
-    }
-
-    // append the list to the choices ID
-    choiceContainer.append(list);
-
+// On start button click, run the following functions...
+start.addEventListener('click', function () {
+    // Calls the startTimer function above
+    startTimer();
+    //Calls the startQuiz function above
+    startQuiz();
 });

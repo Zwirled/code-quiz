@@ -14,7 +14,7 @@ time.textContent = count;
 // function to begin the timer
 function startTimer() {
     //timer element - starts the 60s countdown
-    let timerStart = setInterval(function () {
+    let timer = setInterval(function () {
         // count timer to go down by 1 after each iteration
         count--;
         // change the time ID content to be equal to the count

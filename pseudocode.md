@@ -6,15 +6,21 @@
 
 - A start button (already in HTML starter code).
 - Event listener on button click.
-- When clicked, timer will begin (from 60s).
-- When clicked, the start section will add class hide.
-- When clicked, the question container will remove class hide (be visible).
-- When clicked, first question will appear (Math.rand).
+
+When clicked...
+- Timer will begin (from 60s).
+- The start container will disappear (add class hide).
+- The question container will appear (remove class hide).
 
 ##2
 
-- If answer === true, proceed to next question.
-- If answer === false, take 10s off timer.
+When question container appears...
+- Text content of H2 to add question.
+- Create elements: ul, li, button - button text to add choices.
+
+When choice button is clicked...
+- If answer is correct, proceed to next question.
+- If answer is wrong, take 10s off timer.
 
 ##3
 - Loop through until timer has run out.

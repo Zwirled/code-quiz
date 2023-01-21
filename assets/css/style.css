@@ -38,7 +38,7 @@ input[type="text"] {
   font-size: 100%;
 }
 
-ol {
+ul {
   padding-left: 0px;
   max-height: 400px;
   overflow: auto;
@@ -46,7 +46,7 @@ ol {
 
 li {
   padding: 5px;
-  list-style: decimal inside none;
+  list-style: none;
 }
 
 li:nth-child(odd) {

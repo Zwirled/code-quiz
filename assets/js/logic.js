@@ -29,6 +29,8 @@ function startTimer() {
         if (count <= 0) {
             // Clears interval and stops timer
             clearInterval(timer);
+            // sets visible time to 0
+            time.textContent = 0;
         }
         // Change interval every 1s
     }, 1000);
@@ -41,6 +43,11 @@ function nextQuestion() {
     questionTitle.textContent = quiz[currentQuestion].question;
     // Reset the innerHTML of the #choices div to an empty string
     choiceContainer.innerHTML = '';
+    // Reset the innerHTML of the ul to an empty string
+
+    let ul = document.createElement('ul');
+    // ul.innerHTML = '';
+    choiceContainer.appendChild(ul);
 
     // For loop to get the list items and buttons within
     for (let i = 0; i < quiz[currentQuestion].choices.length; i++) {
@@ -53,7 +60,7 @@ function nextQuestion() {
         // Append the button to the li
         li.appendChild(choice);
         // Append the li to the #choices div
-        choiceContainer.appendChild(li);
+        ul.appendChild(li);
     }
 }
 
@@ -68,8 +75,15 @@ choiceContainer.addEventListener('click', function (event) {
         nextQuestion();
 
     } else {
-        // Minus 10s from the timer
-        count -= 10;
+        // If count is greater than 10s...
+        if (count > 10) {
+            // Minus 10s from count
+            count -= 10;
+            // If count is less than 10s
+        } else {
+            // Set count to 0s
+            count = 0;
+        }
     }
 });
 

@@ -16,34 +16,7 @@ let currentQuestion = 0;
 let correctAudio = new Audio('./assets/sfx/correct.wav');
 let incorrectAudio = new Audio('./assets/sfx/incorrect.wav');
 
-function init() {
-    // Get existing scores from local storage
-    let savedScores = localStorage.getItem("highscores");
-
-    // If scores exist
-    if (savedScores) {
-        // Convert string to object
-        highscores = JSON.parse(savedScores);
-    }
-
-    // Get the ordered list element
-    let ol = document.getElementById("highscores");
-
-    // Stops code running on pages without the highscores ol
-    if (ol) {
-        for (let i = 0; i < highscores.length; i++) {
-            // Create the li element within the ol
-            let li = document.createElement('li');
-            // Set the content of the li
-            li.innerHTML = highscores[i].initials + ': ' + highscores[i].score;
-            // Append the li to the ol
-            ol.appendChild(li);
-        }
-    }
-}
-
-// Gets existing scores from local storage
-init();
+// init(); // come back to later
 
 
 

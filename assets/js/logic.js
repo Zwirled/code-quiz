@@ -8,8 +8,6 @@ let choiceContainer = document.querySelector('#choices');
 let time = document.querySelector('#time');
 let count = 60;
 
-let score = 0;
-
 // Starts timer at 60 before pressing start button
 time.textContent = count;
 
@@ -103,12 +101,6 @@ choiceContainer.addEventListener('click', function (event) {
         }
     }
 });
-
-function collectScore() {
-    let scoreMessage = score + "/" + quiz.length + " and you had " + count + "s remaining";
-    let finalScore = document.getElementById("final-score").textContent = scoreMessage;
-}
-
 
 // Hides the start scereen and shows the question container
 function startQuiz() {

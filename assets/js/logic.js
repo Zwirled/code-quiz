@@ -6,7 +6,7 @@ let questionTitle = document.querySelector('#question-title');
 let choiceContainer = document.querySelector('#choices');
 
 let time = document.querySelector('#time');
-let count = 60;
+let count = 30;
 
 // Starts timer at 60 before pressing start button
 time.textContent = count;

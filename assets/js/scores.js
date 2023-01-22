@@ -1,6 +1,6 @@
 let score = 0;
 
-let saveData = document.querySelector('#submit');
+let submit = document.querySelector('#submit');
 let initialsInput = document.querySelector('#initials');
 
 let finalScore = document.getElementById("final-score")
@@ -13,7 +13,7 @@ if (savedScores) {
     highscores = [];
 }
 
-let ol = document.querySelector('#highscores');
+let clear = document.querySelector('#clear');
 
 // Collect score and remaining time
 function collectScore() {
@@ -21,30 +21,49 @@ function collectScore() {
     let scoreMessage = score + "/" + quiz.length + " and you had " + count + "s remaining";
     // Add message to final score span
     finalScore.textContent = scoreMessage;
+    //
+    displayScores()
+
 }
 
-// On submit button click...
-saveData.addEventListener('click', function () {
-    // If value in input on submit is empty, return
-    if (initialsInput.value === '') {
-        return;
-    } else {
-        // Store data in object
-        let highscore = {
-            initials: initialsInput.value.trim(),
-            score: score,
-        };
-        highscores.push(highscore);
-        // Store data in local storage
-        localStorage.setItem("highscores", JSON.stringify(highscores));
+// Stops code running on pages without the button
+if (submit) {
+    // On submit button click...
+    submit.addEventListener('click', function () {
+        // If value in input on submit is empty, return
+        if (initialsInput.value === '') {
+            return;
+        } else {
+            // Store data in object
+            let highscore = {
+                initials: initialsInput.value.trim(),
+                score: score,
+            };
+            highscores.push(highscore);
+            // Store data in local storage
+            localStorage.setItem("highscores", JSON.stringify(highscores));
 
-        redirect();
-    }
-    // Reset the input
-    initialsInput.value = "";
+        }
+        // Reset the input
+        initialsInput.value = "";
+    });
+}
+
+let ol = document.getElementById("highscores");
+
+for (let i = 0; i < highscores.length; i++) {
+    let li = document.createElement('li');
+    li.innerHTML = highscores[i].initials + ': ' + highscores[i].score;
+    ol.appendChild(li);
+    console.log(ol);
+    console.log(li);
+}
+
+function reset() {
+    localStorage.removeItem("highscores");
+    ol.innerHTML = '';
+}
+
+clear.addEventListener('click', function () {
+    reset();
 });
-
-function redirect() {
-    // Redirect user to highscores html page
-    window.location.href = "highscores.html";
-}

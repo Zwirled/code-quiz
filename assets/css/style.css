@@ -44,9 +44,20 @@ ul {
   overflow: auto;
 }
 
-li {
+ol {
+  padding-left: 0px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+ul li {
   padding: 5px;
   list-style: none;
+}
+
+ol li {
+  padding: 5px;
+  list-style: decimal inside none;
 }
 
 li:nth-child(odd) {

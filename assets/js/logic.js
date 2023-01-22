@@ -13,6 +13,9 @@ time.textContent = count;
 
 let currentQuestion = 0;
 
+let correctAudio = new Audio('./assets/sfx/correct.wav');
+let incorrectAudio = new Audio('./assets/sfx/incorrect.wav');
+
 function init() {
     // Get existing scores from local storage
     let savedScores = localStorage.getItem("highscores");
@@ -102,6 +105,8 @@ function nextQuestion() {
 choiceContainer.addEventListener('click', function (event) {
     // If button with correct answer is clicked...
     if (event.target.innerText === quiz[currentQuestion].answer) {
+        // Play the correct audio
+        correctAudio.play();
         // Adds 1 point to score
         score += 1;
         // Check if there are questions left
@@ -116,6 +121,8 @@ choiceContainer.addEventListener('click', function (event) {
         }
 
     } else {
+        // Play the correct audio
+        incorrectAudio.play();
         // If count is greater than 10s...
         if (count > 10) {
             // Minus 10s from count

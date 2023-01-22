@@ -6,10 +6,16 @@ let initialsInput = document.querySelector('#initials');
 let finalScore = document.getElementById("final-score")
 
 let highscores;
+
 let savedScores = localStorage.getItem("highscores");
+
+// If scores exist
 if (savedScores) {
+    // Convert string to object
     highscores = JSON.parse(savedScores);
+    // If scores don't exist
 } else {
+    // highscores becomes an array
     highscores = [];
 }
 
@@ -70,7 +76,7 @@ if (ol) {
     }
 }
 
-// Reset the local storage of highscores
+// Reset the loc
 function reset() {
     localStorage.removeItem("highscores");
     // Reset the ol

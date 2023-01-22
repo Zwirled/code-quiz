@@ -79,7 +79,6 @@ choiceContainer.addEventListener('click', function (event) {
         score += 1;
         // Check if there are questions left
         if (currentQuestion === quiz.length - 1) {
-            console.log("Quiz ended");
             endQuiz();
             collectScore();
         } else {

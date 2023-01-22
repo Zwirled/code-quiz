@@ -61,6 +61,9 @@ function startTimer() {
             clearInterval(timer);
             // Sets visible time to 0
             time.textContent = 0;
+            // End quiz
+            endQuiz();
+            collectScore()
         }
         // If all questions have been answered, stop the timer
         if (currentQuestion === quiz.length - 1) {
@@ -125,6 +128,8 @@ function nextQuestion() {
                 } else {
                     // Set count to 0s
                     count = 0;
+                    endQuiz();
+                    collectScore()
                 }
             }
         });

@@ -21,9 +21,10 @@ function collectScore() {
     let scoreMessage = score + "/" + quiz.length + " and you had " + count + "s remaining";
     // Add message to final score span
     finalScore.textContent = scoreMessage;
-    //
-    displayScores()
+}
 
+function redirect() {
+    window.location.href = "highscores.html";
 }
 
 // Stops code running on pages without the button
@@ -34,6 +35,7 @@ if (submit) {
         if (initialsInput.value === '') {
             return;
         } else {
+            redirect()
             // Store data in object
             let highscore = {
                 initials: initialsInput.value.trim(),
@@ -51,12 +53,14 @@ if (submit) {
 
 let ol = document.getElementById("highscores");
 
-for (let i = 0; i < highscores.length; i++) {
-    let li = document.createElement('li');
-    li.innerHTML = highscores[i].initials + ': ' + highscores[i].score;
-    ol.appendChild(li);
-    console.log(ol);
-    console.log(li);
+if (ol) {
+    for (let i = 0; i < highscores.length; i++) {
+        let li = document.createElement('li');
+        li.innerHTML = highscores[i].initials + ': ' + highscores[i].score;
+        ol.appendChild(li);
+        console.log(ol);
+        console.log(li);
+    }
 }
 
 function reset() {
@@ -64,6 +68,8 @@ function reset() {
     ol.innerHTML = '';
 }
 
-clear.addEventListener('click', function () {
-    reset();
-});
+if (clear) {
+    clear.addEventListener('click', function () {
+        reset();
+    });
+}

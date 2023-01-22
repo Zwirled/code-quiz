@@ -29,3 +29,10 @@ When choice button is clicked...
 ##4
 - Display score, and allow user to save their initials and score to either local or global storage?
 - Scores to be saved on "high scores" page.
+- Add reset button
+
+##5
+- Add questions and answers to questions.js
+- Add sound effects
+- Style css
+- Add redirect back in.

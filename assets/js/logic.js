@@ -16,7 +16,34 @@ let currentQuestion = 0;
 let correctAudio = new Audio('./assets/sfx/correct.wav');
 let incorrectAudio = new Audio('./assets/sfx/incorrect.wav');
 
-// init(); // come back to later
+function init() {
+    // Get existing scores from local storage
+    let savedScores = localStorage.getItem("highscores");
+
+    // If scores exist
+    if (savedScores) {
+        // Convert string to object
+        highscores = JSON.parse(savedScores);
+    }
+
+    // Get the ordered list element
+    let ol = document.getElementById("highscores");
+
+    // Stops code running on pages without the highscores ol
+    if (ol) {
+        for (let i = 0; i < highscores.length; i++) {
+            // Create the li element within the ol
+            let li = document.createElement('li');
+            // Set the content of the li
+            li.innerHTML = highscores[i].initials + ': ' + highscores[i].score;
+            // Append the li to the ol
+            ol.appendChild(li);
+        }
+    }
+}
+
+// Gets existing scores from local storage
+init();
 
 
 
@@ -30,12 +57,10 @@ function startTimer() {
         time.textContent = count;
         // End the timer if it reaches 0s
         if (count <= 0) {
-            endQuiz();
             // Stops timer
             clearInterval(timer);
             // Sets visible time to 0
             time.textContent = 0;
-            collectScore();
         }
         // If all questions have been answered, stop the timer
         if (currentQuestion === quiz.length - 1) {
@@ -72,6 +97,7 @@ function nextQuestion() {
         li.appendChild(choice);
         // Append the li to the #choices div
         ul.appendChild(li);
+
     }
 }
 
@@ -129,9 +155,6 @@ function endQuiz() {
 
     // Display questions container on start button click
     endContainer.classList.remove('hide');
-
-    // Collect the score
-    collectScore();
 
 }
 

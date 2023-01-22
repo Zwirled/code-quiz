@@ -72,17 +72,15 @@ function startTimer() {
     }, 1000);
 }
 
-
 // Get the next question along
 function nextQuestion() {
     // Change the question title (Replace content in the H2)
     questionTitle.textContent = quiz[currentQuestion].question;
     // Reset the innerHTML of the #choices div to an empty string
     choiceContainer.innerHTML = '';
-    // Reset the innerHTML of the ul to an empty string
-
+    // Create ul element
     let ul = document.createElement('ul');
-    // ul.innerHTML = '';
+    // Append the ul to the choiceContainer
     choiceContainer.appendChild(ul);
 
     // For loop to get the list items and buttons within
@@ -98,43 +96,40 @@ function nextQuestion() {
         // Append the li to the #choices div
         ul.appendChild(li);
 
+        // If choice button is clicked...
+        choice.addEventListener('click', function (event) {
+            // If choice button clicked is correct answer
+            if (event.target.innerText === quiz[currentQuestion].answer) {
+                // Play the correct audio
+                correctAudio.play();
+                // Adds 1 point to score
+                score += 1;
+                // Check if there are questions left
+                if (currentQuestion === quiz.length - 1) {
+                    endQuiz();
+                    collectScore();
+                } else {
+                    // Increase the index of currentQuestion
+                    currentQuestion++;
+                    // Move on to the next question
+                    nextQuestion();
+                }
+            } else {
+                // Play the incorrect audio
+                incorrectAudio.play();
+                // If count is greater than 10s...
+                if (count > 10) {
+                    // Minus 10s from count
+                    count -= 10;
+                    // If count is less than 10s
+                } else {
+                    // Set count to 0s
+                    count = 0;
+                }
+            }
+        });
     }
 }
-
-
-// Adds event listener to check for correct answer
-choiceContainer.addEventListener('click', function (event) {
-    // If button with correct answer is clicked...
-    if (event.target.innerText === quiz[currentQuestion].answer) {
-        // Play the correct audio
-        correctAudio.play();
-        // Adds 1 point to score
-        score += 1;
-        // Check if there are questions left
-        if (currentQuestion === quiz.length - 1) {
-            endQuiz();
-            collectScore();
-        } else {
-            // Increase the index of currentQuestion
-            currentQuestion++;
-            // Move on to the next question
-            nextQuestion();
-        }
-
-    } else {
-        // Play the correct audio
-        incorrectAudio.play();
-        // If count is greater than 10s...
-        if (count > 10) {
-            // Minus 10s from count
-            count -= 10;
-            // If count is less than 10s
-        } else {
-            // Set count to 0s
-            count = 0;
-        }
-    }
-});
 
 // Hides the start scereen and shows the question container
 function startQuiz() {

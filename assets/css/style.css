@@ -1,9 +1,22 @@
+:root {
+  --blue: #1B2F33;
+    --green: #48644C;
+    --beige: #e0d2c1;
+    --cream: #eee1d2;
+    --pink: #D0445D;
+}
+
+html {
+  background-color: var(--beige);
+}
+
 body {
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   font-size: 120%;
 }
 
 a {
+  font-weight: 800;
   color: #563d7c;
   text-decoration: none;
   transition: color 0.1s;
@@ -61,7 +74,7 @@ ol li {
 }
 
 li:nth-child(odd) {
-  background-color: #f3edfc;
+  background-color: var(--cream);
 }
 
 .wrapper {

@@ -57,10 +57,12 @@ function startTimer() {
         time.textContent = count;
         // End the timer if it reaches 0s
         if (count <= 0) {
+            endQuiz();
             // Stops timer
             clearInterval(timer);
             // Sets visible time to 0
             time.textContent = 0;
+            collectScore();
         }
         // If all questions have been answered, stop the timer
         if (currentQuestion === quiz.length - 1) {
@@ -154,6 +156,9 @@ function endQuiz() {
 
     // Display questions container on start button click
     endContainer.classList.remove('hide');
+
+    // Collect the score
+    collectScore();
 
 }
 

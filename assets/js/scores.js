@@ -24,9 +24,16 @@ let clear = document.querySelector('#clear');
 // Collect score and remaining time
 function collectScore() {
     // Create the message to display at end of quiz
-    let scoreMessage = score + "/" + quiz.length + " and you had " + count + "s remaining";
+    let scoreMessage = score + '/' + quiz.length + ' and you had ' + count + 's remaining';
     // Add message to final score span
     finalScore.textContent = scoreMessage;
+
+    if (score <= 0) {
+        // Create the message to display at end of quiz
+        let scoreMessage = score + '/' + quiz.length + ' and you had 0s remaining';
+        // Add message to final score span
+        finalScore.textContent = scoreMessage;
+    }
 }
 
 // Redirect to highscores page on button submit click
